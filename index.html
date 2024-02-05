@@ -102,13 +102,14 @@
             // 表示を切り替え
             document.getElementById("result").style.display = "none";
             document.getElementById("goBack").style.display = "inline";
+            document.getElementById("participantsForm").style.display = "none"; // 修正点: フォームを非表示にする
         }
 
         function revealResult(selectedParticipant, resultData) {
             document.getElementById("result").innerHTML = `${selectedParticipant} が渡す相手: ${resultData[selectedParticipant]}`;
             document.getElementById("result").style.display = "block";
             document.getElementById("goBack").style.display = "inline";
-            document.getElementById("participantsForm").style.display = "none";
+            document.getElementById("participantNamesList").style.display = "none"; // 修正点: 参加者リストを非表示にする
         }
 
         function goBack() {
@@ -119,7 +120,7 @@
                 const listItem = document.createElement("li");
                 listItem.className = "participant";
                 listItem.textContent = participant;
-                listItem.onclick = () => assignGift(); // 修正点: revealResultではなくassignGiftを呼ぶように変更
+                listItem.onclick = () => assignGift();
                 participantNamesList.appendChild(listItem);
             });
 
@@ -127,6 +128,7 @@
             document.getElementById("result").style.display = "none";
             document.getElementById("goBack").style.display = "none";
             document.getElementById("participantsForm").style.display = "block";
+            document.getElementById("participantNamesList").style.display = "block"; // 修正点: 参加者リストを再表示
         }
     </script>
 
