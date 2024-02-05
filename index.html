@@ -107,7 +107,8 @@
         function revealResult(selectedParticipant, resultData) {
             document.getElementById("result").innerHTML = `${selectedParticipant} が渡す相手: ${resultData[selectedParticipant]}`;
             document.getElementById("result").style.display = "block";
-            document.getElementById("goBack").style.display = "none"; // 結果表示時に「一度戻る」ボタンを非表示にする
+            document.getElementById("goBack").style.display = "inline";
+            document.getElementById("participantsForm").style.display = "none";
         }
 
         function goBack() {
@@ -125,6 +126,7 @@
             // 表示を切り替え
             document.getElementById("result").style.display = "none";
             document.getElementById("goBack").style.display = "none";
+            document.getElementById("participantsForm").style.display = "block";
         }
     </script>
 
