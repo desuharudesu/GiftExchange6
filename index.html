@@ -50,48 +50,42 @@
 
     <script>
         function assignGift() {
-            // サーバーサイドでの結果生成ロジックをここに追加
-
-            // 仮のデータを使用する例
             const participantInput = document.getElementById("participantNames");
-            const participants = participantInput.value.split(",").map(name => name.trim()); // インプットから参加者のリストを取得
+            const participants = participantInput.value.split(",").map(name => name.trim());
 
-            // 参加者の一覧を表示
+            // シャッフル関数を定義
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            // プレゼントをランダムに割り当てる
+            const shuffledParticipants = [...participants];
+            shuffleArray(shuffledParticipants);
+
+            // 結果を表示
+            const resultData = {};
+            participants.forEach((participant, index) => {
+                resultData[participant] = shuffledParticipants[index];
+            });
+
+            // 表示
             const participantNamesList = document.getElementById("participantNamesList");
             participantNamesList.innerHTML = "";
             participants.forEach(participant => {
                 const listItem = document.createElement("li");
                 listItem.className = "participant";
                 listItem.textContent = participant;
-                listItem.onclick = () => revealResult(participant, participants);
+                listItem.onclick = () => revealResult(participant, resultData);
                 participantNamesList.appendChild(listItem);
             });
         }
 
-        function revealResult(selectedParticipant, participants) {
-            // サーバーサイドでの結果取得ロジックをここに追加
-
-            // 仮のデータを使用する例
-            const resultData = generateResultData(participants);
-
-            // 結果を表示
+        function revealResult(selectedParticipant, resultData) {
             document.getElementById("result").innerHTML = `${selectedParticipant} が渡す相手: ${resultData[selectedParticipant]}`;
-            document.getElementById("result").style.display = "block"; // 結果を表示
-        }
-
-        function generateResultData(participants) {
-            // 実際のサーバーサイドロジックをここに追加
-            // ここではランダムな相手を割り当てる仮のロジックを使用
-            const resultData = {};
-            const shuffledParticipants = [...participants]; // コピーを作成
-            for (let i = shuffledParticipants.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffledParticipants[i], shuffledParticipants[j]] = [shuffledParticipants[j], shuffledParticipants[i]];
-            }
-            participants.forEach((participant, index) => {
-                resultData[participant] = shuffledParticipants[index];
-            });
-            return resultData;
+            document.getElementById("result").style.display = "block";
         }
     </script>
 
