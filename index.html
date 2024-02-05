@@ -101,15 +101,16 @@
 
             // 表示を切り替え
             document.getElementById("result").style.display = "none";
-            document.getElementById("goBack").style.display = "none"; // goBackを非表示にする
-            document.getElementById("participantNamesList").style.display = "block"; // 参加者リストを表示
-            document.getElementById("participantsForm").style.display = "none"; // フォームを非表示にする
+            document.getElementById("goBack").style.display = "none"; // 修正点: goBackを非表示にする
+            document.getElementById("participantNamesList").style.display = "block"; // 修正点: 参加者リストを表示
+            document.getElementById("participantsForm").style.display = "none"; // 修正点: フォームを非表示にする
         }
 
         function revealResult(selectedParticipant, resultData) {
             document.getElementById("result").innerHTML = `${selectedParticipant} が渡す相手: ${resultData[selectedParticipant]}`;
             document.getElementById("result").style.display = "block";
-            document.getElementById("goBack").style.display = "block"; // goBackを表示
+            document.getElementById("goBack").style.display = "block"; // 修正点: goBackを表示
+            document.getElementById("participantNamesList").style.display = "none"; // 修正点: 参加者リストを非表示にする
         }
 
         function goBack() {
@@ -120,7 +121,7 @@
                 const listItem = document.createElement("li");
                 listItem.className = "participant";
                 listItem.textContent = participant;
-                listItem.onclick = () => revealResult(participant, {}); // goBack時はrevealResultに空のresultDataを渡す
+                listItem.onclick = () => revealResult(participant, {}); // 修正点: goBack時はrevealResultに空のresultDataを渡す
                 participantNamesList.appendChild(listItem);
             });
 
