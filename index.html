@@ -119,7 +119,7 @@
                 const listItem = document.createElement("li");
                 listItem.className = "participant";
                 listItem.textContent = participant;
-                listItem.onclick = () => revealResult(participant, {});
+                listItem.onclick = () => assignGift(); // 修正点: revealResultではなくassignGiftを呼ぶように変更
                 participantNamesList.appendChild(listItem);
             });
 
