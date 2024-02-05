@@ -63,24 +63,27 @@
                 const listItem = document.createElement("li");
                 listItem.className = "participant";
                 listItem.textContent = participant;
-                listItem.onclick = () => revealResult(participant);
+                listItem.onclick = () => revealResult(participant, participants);
                 participantNamesList.appendChild(listItem);
             });
         }
 
-        function revealResult(selectedParticipant) {
+        function revealResult(selectedParticipant, participants) {
             // サーバーサイドでの結果取得ロジックをここに追加
 
             // 仮のデータを使用する例
-            const resultData = {
-                [selectedParticipant]: "相手の名前"
-            };
+            const resultData = generateResultData(participants);
 
             // 結果を表示
             document.getElementById("result").innerHTML = `${selectedParticipant} が渡す相手: ${resultData[selectedParticipant]}`;
             document.getElementById("result").style.display = "block"; // 結果を表示
         }
-    </script>
 
-</body>
-</html>
+        function generateResultData(participants) {
+            // 実際のサーバーサイドロジックをここに追加
+            // ここではランダムな相手を割り当てる仮のロジックを使用
+            const resultData = {};
+            const shuffledParticipants = [...participants]; // コピーを作成
+            for (let i = shuffledParticipants.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledParticipants[i], shuffledParticipants[j]] = [shuff
