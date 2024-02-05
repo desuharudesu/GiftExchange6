@@ -32,6 +32,14 @@
             color: #34a853;
             display: none;
         }
+
+        #goBack {
+            margin-top: 20px;
+            cursor: pointer;
+            color: #4285f4;
+            text-decoration: underline;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -47,11 +55,16 @@
     <ul id="participantNamesList"></ul>
 
     <div id="result"></div>
+    <div id="goBack" onclick="goBack()">一度戻る</div>
 
     <script>
+        let originalParticipantNames = [];
+
         function assignGift() {
             const participantInput = document.getElementById("participantNames");
             const participants = participantInput.value.split(",").map(name => name.trim());
+
+            originalParticipantNames = [...participants]; // 元の状態を保存
 
             // シャッフル関数を定義
             function shuffleArray(array) {
@@ -85,11 +98,33 @@
                 listItem.onclick = () => revealResult(participant, resultData);
                 participantNamesList.appendChild(listItem);
             });
+
+            // 表示を切り替え
+            document.getElementById("result").style.display = "none";
+            document.getElementById("goBack").style.display = "inline";
         }
 
         function revealResult(selectedParticipant, resultData) {
             document.getElementById("result").innerHTML = `${selectedParticipant} が渡す相手: ${resultData[selectedParticipant]}`;
             document.getElementById("result").style.display = "block";
+            document.getElementById("goBack").style.display = "none"; // 結果表示時に「一度戻る」ボタンを非表示にする
+        }
+
+        function goBack() {
+            // 元の状態に戻す
+            const participantNamesList = document.getElementById("participantNamesList");
+            participantNamesList.innerHTML = "";
+            originalParticipantNames.forEach(participant => {
+                const listItem = document.createElement("li");
+                listItem.className = "participant";
+                listItem.textContent = participant;
+                listItem.onclick = () => revealResult(participant, {});
+                participantNamesList.appendChild(listItem);
+            });
+
+            // 表示を切り替え
+            document.getElementById("result").style.display = "none";
+            document.getElementById("goBack").style.display = "none";
         }
     </script>
 
