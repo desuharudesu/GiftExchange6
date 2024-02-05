@@ -106,7 +106,7 @@
 
         function revealResult(selectedParticipant, resultData) {
             document.getElementById("result").innerHTML = `${selectedParticipant} が渡す相手: ${resultData[selectedParticipant]}`;
-            document.getElementById("result").style.display = "none"; // 渡す相手の表示を非表示にする
+            document.getElementById("result").style.display = "block";
             document.getElementById("goBack").style.display = "inline";
             document.getElementById("participantsForm").style.display = "none";
         }
