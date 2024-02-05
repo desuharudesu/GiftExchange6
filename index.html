@@ -64,10 +64,10 @@
             // プレゼントをランダムに割り当てる
             let shuffledParticipants = [...participants];
 
-            // 自分にならないように確認
+            // 重複なしで相手を割り当てる
             do {
                 shuffleArray(shuffledParticipants);
-            } while (shuffledParticipants[shuffledParticipants.length - 1] === participants[participants.length - 1]);
+            } while (shuffledParticipants.some((value, index) => value === participants[index]));
 
             // 結果を表示
             const resultData = {};
